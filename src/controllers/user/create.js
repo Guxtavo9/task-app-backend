@@ -16,7 +16,9 @@ import bcrypt from "bcrypt";
 
 const create = async (req, res) => {
   try {
-    const { email, pass } = req.body;
+    // const { email, pass } = req.body;
+    const email = 'test@test.com'
+    const pass = uuidv1()
     const name = uuidv1()
     const result = userModel.validadeUserToCreate(name, email, pass);
     console.log(result);
@@ -27,7 +29,7 @@ const create = async (req, res) => {
         fields: errorFormated.fieldErrors,
       });
     }
-    // result.data.pass = await bcrypt.hash(result.data.pass, 10);
+    result.data.pass = await bcrypt.hash(result.data.pass, 10);
 
     const user = await userModel.create(result.data.name, result.data.email, result.data.pass);
     return res.status(200).json({
