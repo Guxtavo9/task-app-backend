@@ -52,15 +52,15 @@ const validadeUserToUpdate = (name, email, pass) => {
 //   return partialUserSchema.safeParse({ id, name, email, });
 // };
 
-// const getAll = () => {
-//   return prisma.user.findMany({
-//     select: {
-//       id: true,
-//       name: true,
-//       email: true,
-//     },
-//   });
-// };
+const getAll = () => {
+  return prisma.user.findMany({
+    select: {
+      id: true,
+      name: true,
+      email: true,
+    },
+  });
+};
 
 const getById = (id) => {
   return prisma.user.findUnique({
@@ -118,7 +118,7 @@ const deletear = (id) => {
 };
 
 export default {
-  // getAll,
+  getAll,
   getById,
   // getByEmail,
   create,
