@@ -3,103 +3,102 @@ import { z } from "zod";
 
 const prisma = new PrismaClient();
 
-const userSchema = z.object({
+const taskSchema = z.object({
   id: z.number({
     required_error: "o ID é obrigatorio",
     invalid_type_error: "o ID esse campo deve ser um Inteiro",
   }),
-  name: z
+  IdUser: z.number({
+    required_error: "o ID de ususario é obrigatorio",
+    invalid_type_error: "o ID de ususario esse campo deve ser um Inteiro",
+  }),
+  title: z
     .string({
-      required_error: "o Nome é obrigatorio",
-      invalid_type_error: "o Nome deve ser uma String",
+      required_error: "o Titulo é obrigatorio",
+      invalid_type_error: "o Titulo deve ser uma String",
     })
     .min(2, {
-      message: "o nome deve conter no minimo 2 caracteres",
+      message: "o Titulo deve conter no minimo 2 caracteres",
     })
     .max(200, {
-      message: "o nome deve ter no maximo 200 caracteres",
+      message: "o Titulo deve ter no maximo 200 caracteres",
     }),
-  email: z
+  descricao: z
     .string({
-      required_error: "o Email é obrigatorio",
+      required_error: "o descrição é obrigatorio",
     })
     .email({
-      message: "email invalido",
+      message: "descrição invalido",
     })
     .max(500, {
-      message: "o email deve ter no maximo 500 caracteres",
+      message: "o descrição deve ter no maximo 500 caracteres",
     }),
-  pass: z
-    .string({
-      required_error: "a Senha é obrigatoria",
-      invalid_type_error: "a Senha deve ser uma String",
+  isChecked: z
+    .boolean({
+      required_error: "a isChecked é obrigatoria",
+      invalid_type_error: "a isChecked deve ser um boolean",
     })
     .min(8, {
-      message: "a senha deve conter no minimo 8 caracteres",
+      message: "a isChecked deve conter no minimo 8 caracteres",
     })
 });
 
-const validadeUserToCreate = (name, email, pass) => {
-  const partialUserSchema = userSchema.partial({ id: true });
-  return partialUserSchema.safeParse({ name, email, pass });
+const validadeTaskToCreate = (title, descricao, IdUser) => {
+  const partialTaskSchema = taskSchema.partial({ id: true, isChecked: true });
+  return partialTaskSchema.safeParse({ title, descricao, IdUser });
 };
-const validadeUserToUpdate = (name, email, pass) => {
-  const partialUserSchema = userSchema.partial({ pass: true });
-  return partialUserSchema.safeParse({ id, name, email, });
+const validadeTaskToUpdate = (title, descricao, IdUser) => {
+  const partialTaskSchema = taskSchema.partial({ pass: true });
+  return partialTaskSchema.safeParse({ id, isChecked, title, descricao, IdUser, });
 };
-// const validadeUserToLogin = (name, email, pass) => {
-//   const partialUserSchema = userSchema.partial({ pass: true });
-//   return partialUserSchema.safeParse({ id, name, email, });
+// const validadeTaskToLogin = (title, descricao, IdUser) => {
+//   const partialTaskSchema = taskSchema.partial({ pass: true });
+//   return partialTaskSchema.safeParse({ id, name, email, });
 // };
 
 const getAll = () => {
-  return prisma.user.findMany({
+  return prisma.task.findMany({
     select: {
       id: true,
-      name: true,
-      email: true,
+      title: true,
+      description: true,
+      IdUser: true,
     },
   });
 };
 
 const getById = (id) => {
-  return prisma.user.findUnique({
+  return prisma.task.findUnique({
     where: { id },
     select: {
       id: true,
-      name: true,
-      email: true,
+      title: true,
+      description: true,
+      IdUser: true,
     },
   });
 };
 
-// const getByEmail = (email) => {
-//   return prisma.user.findUnique({
-//     where: {
-//       email
-//     },
-//   });
-// };
-
-const create = (name, email, pass) => {
-  return prisma.user.create({
-    data: { name, email, pass },
+const create = (title, descricao, IdUser) => {
+  return prisma.task.create({
+    data: { title, descricao, IdUser },
     select: {
-      id: true,
-      name: true,
-      email: true,
+      title: true,
+      description: true,
+      IdUser: true,
     },
   });
 };
 
 const update = (id, name, email) => {
-  return prisma.user.update({
+  return prisma.task.update({
     where: { id },
     data: { name, email },
     select: {
       id: true,
-      name: true,
-      email: true,
+      title: true,
+      description: true,
+      IdUser: true,
 
     },
   });
@@ -110,8 +109,9 @@ const deletear = (id) => {
     where: { id },
     select: {
       id: true,
-      name: true,
-      email: true,
+      title: true,
+      description: true,
+      IdUser: true,
 
     },
   });
@@ -124,7 +124,7 @@ export default {
   create,
   update,
   deletear,
-  validadeUserToCreate,
-  validadeUserToUpdate,
-  // validadeUserToLogin,;
+  validadeTaskToCreate,
+  validadeTaskToUpdate,
+  // validadeTaskToLogin,;
 };

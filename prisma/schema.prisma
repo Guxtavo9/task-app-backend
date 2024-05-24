@@ -23,6 +23,6 @@ model task {
   title       String  @db.VarChar(200)
   description String? @db.Text
   isChecked   Boolean @default(false)
-  user_id     Int
-  user        user    @relation(fields: [user_id], references: [id])
+  IdUser     Int
+  user        user    @relation(fields: [IdUser], references: [id])
 }
