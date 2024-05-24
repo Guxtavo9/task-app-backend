@@ -1,13 +1,14 @@
 import userModel from "../../models/userModel.js";
 // import { zodErrorFormat } from "../../helpers/zodErrorFormat.js";
 import bcrypt from "bcrypt";
+
 const uuidName = async () => {
-  try{
-    const uuidName = toString(fetch('https://www.uuidtools.com/api/generate/timestamp-first/count/1'))
-    // const data = await uuidName.json()
-    console.log(uuidName)
-    console.log(data.success)
-  } catch (error){
+  try {
+    const uuidName = await fetch('https://www.uuidtools.com/api/generate/timestamp-first/count/1')
+    const name = uuidName.data
+    await console.log(name)
+    return name
+  } catch (error) {
     console.log('Error ao gerar nome ' + error.message)
   }
 }
