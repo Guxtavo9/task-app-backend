@@ -6,7 +6,7 @@ const listAll = async (req, res) => {
     const IdUser = +req.params.id
     const tasks = await taskModel.getAll({ user: IdUser });
     return res.json({
-      success: "Usuarios listados com sucesso",
+      success: "tarefas listadas com sucesso",
       tasks,
     });
   } catch (error) {

@@ -1,11 +1,11 @@
-import userModel from "../../models/userModel.js";
+import taskModel from "../../models/taskModel.js";
 
 const getById = async (req, res) => {
   const id = req.params.id;
-  const user = await userModel.getById(parseInt(id))
+  const task = await taskModel.getById(parseInt(id))
   return res.status(200).json({
-    success: `o Usuario ${id} ta ai`,
-    user
+    success: `a tarefas ${id} ta ai`,
+    task
   });
 };
 
