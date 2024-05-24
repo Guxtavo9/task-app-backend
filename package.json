@@ -6,7 +6,6 @@
   "type": "module",
   "scripts": {
     "start": "node src/server.js",
-    
     "dev": "nodemon --env-file=.env src/server.js",
     "prisma:generate": "npx prisma generate",
     "push": "npx prisma db push",
