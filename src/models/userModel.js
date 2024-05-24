@@ -16,7 +16,7 @@ const userSchema = z.object({
     .min(2, {
       message: "o nome deve conter no minimo 2 caracteres",
     })
-    .max(250, {
+    .max(200, {
       message: "o nome deve ter no maximo 200 caracteres",
     }),
   email: z
