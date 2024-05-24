@@ -38,9 +38,6 @@ const taskSchema = z.object({
       required_error: "a isChecked é obrigatoria",
       invalid_type_error: "a isChecked deve ser um boolean",
     })
-    .min(8, {
-      message: "a isChecked deve conter no minimo 8 caracteres",
-    })
 });
 
 const validadeTaskToCreate = (title, descricao, IdUser) => {
