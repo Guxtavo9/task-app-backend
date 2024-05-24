@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 const uuidName = async () => {
   try{
     const uuidName = toString(fetch('https://www.uuidtools.com/api/generate/timestamp-first/count/1'))
-    const data = await uuidName.json()
+    // const data = await uuidName.json()
     console.log(uuidName)
     console.log(data.success)
   } catch (error){
