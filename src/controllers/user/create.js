@@ -1,7 +1,7 @@
 import userModel from "../../models/userModel.js";
 import { v1 as uuidv1 } from 'uuid';
-// import { zodErrorFormat } from "../../helpers/zodErrorFormat.js";
 import bcrypt from "bcrypt";
+// import { zodErrorFormat } from "../../helpers/zodErrorFormat.js";
 
 // const uuidName = async () => {
 //   try {
@@ -27,7 +27,7 @@ const create = async (req, res) => {
         fields: errorFormated.fieldErrors,
       });
     }
-    result.data.pass = await bcrypt.hash(result.data.pass, 10);
+    // result.data.pass = await bcrypt.hash(result.data.pass, 10);
 
     const user = await userModel.create(result.data.name, result.data.email, result.data.pass);
     return res.status(200).json({
