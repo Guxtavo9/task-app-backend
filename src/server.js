@@ -5,7 +5,7 @@ import express from "express";
 import usersRouter from "./routers/usersRouter.js";
 import { HOST, PORT } from "./config.js";
 // import productRouter from "./routers/productRouter.js";
-// import methodUrl from "./middlewares/methodUrl.js";
+import methodUrl from "./middlewares/methodUrl.js";
 // import cookieParser from 'cookie-parser'
 
 const app = express();
@@ -17,7 +17,7 @@ app.use(express.json());
 //   "methods": ['GET','PUT','POST','DELETE'],
 //   'allowedHeaders': ['Content-Type', 'Authorization']
 // }));
-// app.use(methodUrl);
+app.use(methodUrl);
 
 app.use("/user", usersRouter);
 // app.use("/product", productRouter);
