@@ -1,22 +1,23 @@
 import userModel from "../../models/userModel.js";
+import { v1 as uuidv1 } from 'uuid';
 // import { zodErrorFormat } from "../../helpers/zodErrorFormat.js";
 import bcrypt from "bcrypt";
 
-const uuidName = async () => {
-  try {
-    const uuidName = await fetch('https://www.uuidtools.com/api/generate/timestamp-first/count/1')
-    const name = uuidName.data
-    await console.log(name)
-    return name
-  } catch (error) {
-    console.log('Error ao gerar nome ' + error.message)
-  }
-}
+// const uuidName = async () => {
+//   try {
+//     const uuidName = await fetch('https://www.uuidtools.com/api/generate/timestamp-first/count/1')
+//     const name = uuidName.data
+//     await console.log(name)
+//     return name
+//   } catch (error) {
+//     console.log('Error ao gerar nome ' + error.message)
+//   }
+// }
 
 const create = async (req, res) => {
   try {
     const { email, pass } = req.body;
-    const name = uuidName()
+    const name = uuidv1()
     const result = userModel.validadeUserToCreate(name, email, pass);
     console.log(result);
     if (!result.success) {
