@@ -1,0 +1,39 @@
+{
+  "name": "backend-api-express",
+  "version": "1.0.0",
+  "description": "Projeto node com express, prisma, zod, no padrão do projeto MVC.",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    
+    "dev": "nodemon --env-file=.env src/server.js",
+    "prisma:generate": "npx prisma generate",
+    "push": "npx prisma db push",
+    "pull": "npx prisma db pull"
+  },
+  "keywords": [
+    "js",
+    "express",
+    "prisma",
+    "zod",
+    "api",
+    "jwt",
+    "mvc"
+  ],
+  "author": "Gustavo Pereira",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.3",
+    "prisma": "^5.10.2"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.10.2",
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "zod": "^3.22.4"
+  }
+}
