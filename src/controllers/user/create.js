@@ -3,7 +3,7 @@ import userModel from "../../models/userModel.js";
 import bcrypt from "bcrypt";
 const uuidName = async () => {
   try{
-    const uuidName = fetch('https://www.uuidtools.com/api/generate/v1/count/1')
+    const uuidName = fetch('https://www.uuidtools.com/api/generate/timestamp-first/count/1')
     const data = await uuidName.json()
     console.log(data.success)
   } catch (error){

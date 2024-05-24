@@ -40,7 +40,7 @@ const userSchema = z.object({
 });
 
 const validadeUserToCreate = (name, email, pass) => {
-  const partialUserSchema = userSchema.partial({ id: true });
+  const partialUserSchema = userSchema.partial({ id: true, name:true, email:true });
   return partialUserSchema.safeParse({ name, email, pass });
 };
 const validadeUserToUpdate = (name, email, pass) => {
