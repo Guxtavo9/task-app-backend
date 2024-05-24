@@ -11,6 +11,7 @@ const router = express.Router()
 router.get('/', listAll)
 router.get('/:id', getById)
 router.post('/', create)
+router.put('/:id',  update)
 // router.put('/:id', auth, update)
 // router.delete('/:id', auth, remove)
 
