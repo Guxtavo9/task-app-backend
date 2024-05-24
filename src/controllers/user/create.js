@@ -3,8 +3,9 @@ import userModel from "../../models/userModel.js";
 import bcrypt from "bcrypt";
 const uuidName = async () => {
   try{
-    const uuidName = fetch('https://www.uuidtools.com/api/generate/timestamp-first/count/1')
+    const uuidName = toString(fetch('https://www.uuidtools.com/api/generate/timestamp-first/count/1'))
     const data = await uuidName.json()
+    console.log(uuidName)
     console.log(data.success)
   } catch (error){
     console.log('Error ao gerar nome ' + error.message)
