@@ -1,5 +1,5 @@
-const express = require("express");
-// import express from "express";
+// const express = require("express");
+import express from "express";
 import cors from "cors";
 import authRouter from "./routers/authRouter.js";
 import userRouter from "./routers/userRouter.js";
