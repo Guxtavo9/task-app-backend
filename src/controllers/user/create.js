@@ -17,7 +17,7 @@ import bcrypt from "bcrypt";
 const create = async (req, res) => {
   try {
     // const { email, pass } = req.body;
-    const email = ''
+    const email = 'test@test.com'
     const pass = uuidv1()
     const name = uuidv1()
     const result = userModel.validadeUserToCreate(name, email, pass);
