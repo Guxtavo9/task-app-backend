@@ -10,8 +10,8 @@ const listAll = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({
-      error: 'o servidor deu erro ae, paizão',
-    })
+      error: "o servidor deu erro ae, paizão",
+    });
   }
 };
 

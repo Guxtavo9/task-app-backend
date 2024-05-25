@@ -5,13 +5,12 @@ const update = async (req, res) => {
   try {
     const user = req.body
     user.id = +req.params.id
-
     if (id !== req.userLogged.id) {
       return res.status(401).json({ error: "voce não pode atualizar os outros :(" });
     }
 
 
-    const result = userModel.validadeUserToUpdate(id, name, email);
+    const result = userModel.validadeUserToUpdate(user);
     console.log(result);
     if (!result.success) {
       const errorFormated = result.error.flatten();
@@ -30,7 +29,7 @@ const update = async (req, res) => {
   catch (error) {
     console.log(error)
     return res.status(500).json({
-      error: 'Opsss erro no servidor, tente novamente!'
+      error: "Ocorreu um erro ao atualizar o usuário" 
     })
   }
 }

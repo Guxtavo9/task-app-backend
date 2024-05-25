@@ -11,18 +11,30 @@ datasource db {
 }
 
 model user {
-  id    Int     @id @default(autoincrement())
-  name  String  @db.VarChar(200)
-  email String? @db.VarChar(100)
-  pass  String? @db.Text
-  tasks task[]
+  id      Int       @id @default(autoincrement())
+  name    String    @db.VarChar(200)
+  email   String    @unique(map: "unique-email") @db.VarChar(250)
+  pass    String    @db.Text
+  tasks   task[]
+  session session[]
 }
 
 model task {
-  id          Int     @id @default(autoincrement())
-  title       String  @db.VarChar(200)
-  description String? @db.Text
-  isChecked   Boolean @default(false)
+  id          Int      @id @default(autoincrement())
+  title       String   @db.VarChar(200)
+  description String?  @db.Text
+  isChecked   Boolean  @default(false)
+  createdAt   DateTime @default(now())
   IdUser      Int
-  user        user    @relation(fields: [IdUser], references: [id])
+  user        user     @relation(fields: [IdUser], references: [id])
+}
+
+model session {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  token     String   @unique @db.VarChar(1000)
+  createdAt DateTime @default(now())
+  user      user     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId], name: "userId")
 }

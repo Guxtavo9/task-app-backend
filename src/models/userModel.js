@@ -36,21 +36,26 @@ const userSchema = z.object({
     })
     .min(8, {
       message: "a senha deve conter no minimo 8 caracteres",
-    })
+    }),
 });
 
-const validadeUserToCreate = (name, email, pass) => {
-  const partialUserSchema = userSchema.partial({ id: true, name:true, email:true });
-  return partialUserSchema.safeParse({ name, email, pass });
+const validadeUserToCreate = (user) => {
+  const partialUserSchema = userSchema.partial({ id: true });
+  return partialUserSchema.safeParse(user);
 };
-const validadeUserToUpdate = (name, email, pass) => {
+
+// name:true, email:true
+const validadeUserToUpdate = (user) => {
   const partialUserSchema = userSchema.partial({ pass: true });
-  return partialUserSchema.safeParse({ id, name, email, });
+  return partialUserSchema.safeParse(user);
 };
-// const validadeUserToLogin = (name, email, pass) => {
-//   const partialUserSchema = userSchema.partial({ pass: true });
-//   return partialUserSchema.safeParse({ id, name, email, });
-// };
+const validadeUserToLogin = (user) => {
+  const partialUserSchema = userSchema.partial({
+    id: true,
+    name: true,
+  });
+  return partialUserSchema.safeParse(user);
+};
 
 const getAll = () => {
   return prisma.user.findMany({
@@ -73,17 +78,9 @@ const getById = (id) => {
   });
 };
 
-// const getByEmail = (email) => {
-//   return prisma.user.findUnique({
-//     where: {
-//       email
-//     },
-//   });
-// };
-
-const create = (name, email, pass) => {
+const create = (user) => {
   return prisma.user.create({
-    data: { name, email, pass },
+    data: user,
     select: {
       id: true,
       name: true,
@@ -92,15 +89,14 @@ const create = (name, email, pass) => {
   });
 };
 
-const update = (id, name, email) => {
+const update = (user) => {
   return prisma.user.update({
-    where: { id },
-    data: { name, email },
+    where: { id: user.id },
+    data: { user },
     select: {
       id: true,
       name: true,
       email: true,
-
     },
   });
 };
@@ -112,7 +108,14 @@ const deletear = (id) => {
       id: true,
       name: true,
       email: true,
+    },
+  });
+};
 
+const getByEmail = async (email) => {
+  return await prisma.user.findUnique({
+    where: {
+      email,
     },
   });
 };
@@ -120,11 +123,11 @@ const deletear = (id) => {
 export default {
   getAll,
   getById,
-  // getByEmail,
   create,
   update,
   deletear,
   validadeUserToCreate,
   validadeUserToUpdate,
-  // validadeUserToLogin,;
+  validadeUserToLogin,
+  getByEmail,
 };

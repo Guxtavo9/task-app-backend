@@ -1,7 +1,7 @@
 {
   "name": "backend-api-express",
   "version": "1.0.0",
-  "description": "Projeto node com express, prisma, zod, no padrão do projeto MVC.",
+  "description": "Projeto Backend do App Task-App utilizando express, prisma, zod, no padrão do projeto MVC.",
   "main": "src/server.js",
   "type": "module",
   "scripts": {
