@@ -6,6 +6,7 @@ import refreshToken from "../controllers/auth/refreshToken.js";
 
 const router = express.Router();
 
+router.get("/login", () => console.log("login"));
 router.post("/login", login);
 router.post("/logout", auth, logout);
 router.post("/refresh-token", refreshToken);
