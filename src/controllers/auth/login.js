@@ -29,42 +29,42 @@ const login = async (req, res) => {
         error: `Email ou senha inválida`,
       });
     }
+    if (passIsValid) {
+      const token = jwt.sign(
+        {
+          id: userFound.id,
+          name: userFound.name,
+        },
+        SECRET_KEY,
+        {
+          expiresIn: TOKEN_EXPIRES_IN,
+        }
+      );
+      res.cookie("token", token, {
+        httpOnly: true,
+        sameSite: "None",
+        secure: true,
+        maxAge: 24 * 60 * 60 * 1000,
+      });
 
-    const token = jwt.sign(
-      {
-        id: userFound.id,
-        name: userFound.name,
-      },
-      SECRET_KEY,
-      {
-        expiresIn: TOKEN_EXPIRES_IN,
-      }
-    );
+      let date = new Date();
+      date.setHours(date.getHours() - 3);
 
-    res.cookie("token", token, {
-      httpOnly: true,
-      sameSite: "None",
-      secure: true,
-      maxAge: 24 * 60 * 60 * 1000,
-    });
-
-    let date = new Date();
-    date.setHours(date.getHours() - 3);
-
-    await sessionModel.create({
-      userId: userFound.id,
-      token,
-      createdAt: date,
-    });
-    return res.json({
-      message: "User Logado!",
-      token,
-      user: {
-        id: userFound.id,
-        name: userFound.name,
-        email: userFound.email,
-      },
-    });
+      await sessionModel.create({
+        userId: userFound.id,
+        token,
+        createdAt: date,
+      });
+      return res.json({
+        message: "User Logado!",
+        token,
+        user: {
+          id: userFound.id,
+          name: userFound.name,
+          email: userFound.email,
+        },
+      });
+    }
   } catch (error) {
     console.log(error);
     return res.status(500).json({
