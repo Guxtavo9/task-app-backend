@@ -3,7 +3,7 @@ import listAll from "../controllers/user/listAll.js";
 import getById from "../controllers/user/getById.js";
 import create from "../controllers/user/create.js";
 import update from "../controllers/user/update.js";
-import remove from '../controllers/user/remove.js'
+import remove from '../controllers/user/removeUser.js'
 import auth from '../middlewares/auth.js'
 
 const router = express.Router();
