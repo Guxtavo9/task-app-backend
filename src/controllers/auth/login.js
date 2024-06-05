@@ -8,7 +8,7 @@ const login = async (req, res) => {
   try {
     const { email, pass } = req.body;
 
-    const result = userModel.validateUserToLogin({ email, pass });
+    const result = userModel.validadeUserToLogin({ email, pass });
     if (!result.success) {
       return res.status(400).json({
         error: `Dados de Atualização Inválido`,
